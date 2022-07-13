@@ -1,0 +1,16 @@
+D:\Visual Studio\AssemblyUpdater\AssemblyUpdater\bin\Debug\AssemblyUpdater.exe.config
+D:\Visual Studio\AssemblyUpdater\AssemblyUpdater\bin\Debug\AssemblyUpdater.exe
+D:\Visual Studio\AssemblyUpdater\AssemblyUpdater\bin\Debug\AssemblyUpdater.pdb
+D:\Visual Studio\AssemblyUpdater\AssemblyUpdater\bin\Debug\Microsoft.WindowsAPICodePack.dll
+D:\Visual Studio\AssemblyUpdater\AssemblyUpdater\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+D:\Visual Studio\AssemblyUpdater\AssemblyUpdater\bin\Debug\Microsoft.WindowsAPICodePack.xml
+D:\Visual Studio\AssemblyUpdater\AssemblyUpdater\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
+D:\Visual Studio\AssemblyUpdater\AssemblyUpdater\obj\Debug\AssemblyUpdater.csproj.AssemblyReference.cache
+D:\Visual Studio\AssemblyUpdater\AssemblyUpdater\obj\Debug\AssemblyUpdater.csproj.SuggestedBindingRedirects.cache
+D:\Visual Studio\AssemblyUpdater\AssemblyUpdater\obj\Debug\AssemblyUpdater.AssemblyUpdater.resources
+D:\Visual Studio\AssemblyUpdater\AssemblyUpdater\obj\Debug\AssemblyUpdater.Properties.Resources.resources
+D:\Visual Studio\AssemblyUpdater\AssemblyUpdater\obj\Debug\AssemblyUpdater.csproj.GenerateResource.cache
+D:\Visual Studio\AssemblyUpdater\AssemblyUpdater\obj\Debug\AssemblyUpdater.csproj.CoreCompileInputs.cache
+D:\Visual Studio\AssemblyUpdater\AssemblyUpdater\obj\Debug\AssemblyUpdater.csproj.CopyComplete
+D:\Visual Studio\AssemblyUpdater\AssemblyUpdater\obj\Debug\AssemblyUpdater.exe
+D:\Visual Studio\AssemblyUpdater\AssemblyUpdater\obj\Debug\AssemblyUpdater.pdb
