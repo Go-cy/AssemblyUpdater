@@ -1,4 +1,4 @@
-﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +21,12 @@ namespace AssemblyUpdater
             InitializeComponent();
         }
 
+        #region Event
+        private void AssemblyUpdater_Load(object sender, EventArgs e)
+        {
+            dateTimePicker1.Value = DateTime.Now;
+        }
+
         private void btnSelect_Click(object sender, EventArgs e)
         {
             FolderOpen();
@@ -28,7 +34,14 @@ namespace AssemblyUpdater
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            checkedListBox1.Items.Remove(checkedListBox1.SelectedItem);
+            //뒤에서 부터 지워야함.
+            for(int i = checkedListBox1.Items.Count - 1; i >= 0; i--)
+            {
+                if(checkedListBox1.GetItemChecked(i))
+                {
+                    checkedListBox1.Items.Remove(checkedListBox1.Items[i]);
+                }
+            }
         }
 
         private void btnCheck_Click(object sender, EventArgs e)
@@ -49,9 +62,12 @@ namespace AssemblyUpdater
 
         private void btnAssemblyUpdate_Click(object sender, EventArgs e)
         {
-            AssemblyUpdate(richTextBox1.Text);
+            AssemblyUpdate(dateTimePicker1.Value, richTextBox1.Text);
         }
 
+        #endregion
+
+        #region Method
         private void FolderOpen()
         {
             using (CommonOpenFileDialog FolderOpen = new CommonOpenFileDialog())
@@ -59,20 +75,23 @@ namespace AssemblyUpdater
                 FolderOpen.Title = "Select Assembly Mother Folder for updating";
                 FolderOpen.Multiselect = true; // 파일 다중 선택        
                 FolderOpen.IsFolderPicker = true;
-                FolderOpen.InitialDirectory = @"D:\Visual Studio\AssemblyUpdater\AssemblyUpdater";
+                FolderOpen.InitialDirectory = @"D:\Program_Source_VS2015\PackageApplication";
 
                 if (FolderOpen.ShowDialog() == CommonFileDialogResult.Ok)
                 {
                     string[] folderList = FolderOpen.FileNames.ToArray();
                     for (int i = 0; i < folderList.Length; i++)
                     {
-                        this.checkedListBox1.Items.Add(folderList[i], true);
+                        if (!checkedListBox1.Items.Contains(folderList[i]))
+                        {
+                            checkedListBox1.Items.Add(folderList[i], true);
+                        }
                     }
                 }
             }
         }
 
-        private void AssemblyUpdate(string strComment)
+        private void AssemblyUpdate(DateTime dtDate, string strComment)
         {
             for (int i = 0; i < checkedListBox1.CheckedItems.Count; i++)
             {
@@ -113,13 +132,13 @@ namespace AssemblyUpdater
                             strLines[j] = strLines[j].Insert(verIndex + 1, ((int)char.GetNumericValue(strLines[j][verIndex]) + 1).ToString());
                             strLines[j] = strLines[j].Remove(verIndex, 1);
                             CommentLine = j;
-                            Version = strLines[j].Substring(verIndex -7, 9);
+                            Version = strLines[j].Substring(verIndex -7, 9).Replace("\"","");
                         }
                     }
 
                     if(CommentLine > 0)
                     {
-                        strLines[CommentLine] += Environment.NewLine + Environment.NewLine + "//" + Version + "\t" + strComment;
+                        strLines[CommentLine] += Environment.NewLine + Environment.NewLine + "// " + Version + " - 고찬윤 - " + dtDate.ToString("yyyy-MM-dd") + " : " + strComment;
                         //최초 버전 아닐 시 버전주석 공백제거
                         if (!Version.Equals("\"1.0.0.0\"") && CommentLine + 1 < strLines.Count && strLines[CommentLine + 1].Equals(""))
                         {
@@ -132,5 +151,6 @@ namespace AssemblyUpdater
                 File.WriteAllText(FilePath, Result);
             }
         }
+        #endregion
     }
 }
