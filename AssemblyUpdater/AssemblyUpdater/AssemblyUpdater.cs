@@ -42,6 +42,7 @@ namespace AssemblyUpdater
                     checkedListBox1.Items.Remove(checkedListBox1.Items[i]);
                 }
             }
+            checkItemCountDisplay();
         }
 
         private void btnCheck_Click(object sender, EventArgs e)
@@ -50,6 +51,7 @@ namespace AssemblyUpdater
             {
                 checkedListBox1.SetItemCheckState(i, CheckState.Checked);
             }
+            checkItemCountDisplay();
         }
 
         private void btnUncheck_Click(object sender, EventArgs e)
@@ -58,6 +60,7 @@ namespace AssemblyUpdater
             {
                 checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
             }
+            checkItemCountDisplay();
         }
 
         private void btnAssemblyUpdate_Click(object sender, EventArgs e)
@@ -65,6 +68,10 @@ namespace AssemblyUpdater
             AssemblyUpdate(dateTimePicker1.Value, richTextBox1.Text);
         }
 
+        private void checkedListBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            checkItemCountDisplay();
+        }
         #endregion
 
         #region Method
@@ -87,6 +94,7 @@ namespace AssemblyUpdater
                             checkedListBox1.Items.Add(folderList[i], true);
                         }
                     }
+                    checkItemCountDisplay();
                 }
             }
         }
@@ -149,8 +157,15 @@ namespace AssemblyUpdater
 
                 string Result = string.Join(Environment.NewLine, strLines);
                 File.WriteAllText(FilePath, Result);
+                checkItemCountDisplay(true);
             }
         }
+
+        private void checkItemCountDisplay(bool BeforeAfter = false)
+        {
+            label2.Text = checkedListBox1.CheckedItems.Count + "개의 항목이 " + (BeforeAfter ? "변경되었습니다." : "선택되었습니다.");
+        }
         #endregion
+
     }
 }
